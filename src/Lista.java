@@ -1,13 +1,5 @@
-/**
- * Interface which contains the contract for implementation of stack ADT.
- * <p>
- * Contains all methods required to simulate a stack structure.
- * <p>
- * @author Santiago Gonzalez/Daniel Lara
- */
 
-public interface Stack<E> 
-{
+public interface Lista<E> extends Stack<E>{
 	/**
 	 * 
 	 * @param item item to be pushed.
@@ -44,4 +36,14 @@ public interface Stack<E>
 	 * @return int Amount of items in stack.
 	 */
 	public int size();
+	
+	public void add(E e);
+	//pre: 
+	//post: item e is added to the end of the list
+	public void remove();
+	//pre: 	
+	//post: item e is added to the specified index on the list.
+	public void find();
+	//pre: 
+	//post: 
 }

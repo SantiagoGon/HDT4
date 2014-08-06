@@ -1,45 +1,64 @@
 import java.util.Vector;
 
 
-public class StackVector<E> implements Stack<E> {
+public class StackVector<E> extends StackBase<E> {
 
+	/**
+	 * This is the stack; a collection of generic items.
+	 */
 	protected Vector<E> data;
-	
+
+	/**
+	 * Constructor method.
+	 * @post Constructs a new & empty stack.
+	 */
 	public StackVector(){
-		// post: constructs a new, empty stack
 		data = new Vector<E>(1,1);
 	}
-	
+
+	/**
+	 * 
+	 * @param item item to be pushed.
+	 * @post item is added to stack; will be popped if no intervening push.
+	 */
 	@Override
-	public void push(E item) {
-		// post: the value is added to the stack
-		//          will be popped next if no intervening push
+	public void push(E item)
+	{
 		data.add(item);
 	}
 
+	/**
+	 * 
+	 * @pre stack is not empty.
+	 * @post most recently pushed item is removed and returned.
+	 * @return <E> Most recently pushed item.
+	 */
 	@Override
-	public E pop() {
-		// pre: stack is not empty
-		// post: most recently pushed item is removed and returned
+	public E pop()
+	{
 		return data.remove(size()-1);
 	}
 
+	/**
+	 * 
+	 * @pre stack is not empty.
+	 * @post most recently pushed item is returned.
+	 * @return <E> Most recently pushed item without removing.
+	 */ 
 	@Override
-	public E peek() {
-		// pre: stack is not empty
-		// post: top value (next to be popped) is returned
+	public E peek()
+	{
 		return data.get(size() - 1);
 	}
 
+	/**
+	 * 
+	 * @post counts items in stack.
+	 * @return int Amount of items in stack.
+	 */
 	@Override
-	public boolean empty() {
-		// post: returns true if and only if the stack is empty
-		return data.isEmpty();
-	}
-
-	@Override
-	public int size() {
-		// post: returns the number of elements in the stack
+	public int size()
+	{
 		return data.size();
 	}
 

@@ -8,15 +8,16 @@ import javax.swing.JOptionPane;
 public class Calculadora {
 	private File txt;					//Archivo con instrucciones aritmeticas.
 	private char[] instruccion;			//Array para almanacenar cada linea como una instruccion.
-	private StackVector<Integer> pila;	//Implementacion con funcionalidad de pila.
+	private Stack<Integer> pila;	//Implementacion con funcionalidad de pila.
 	int resultado = 0;					//Utilizado para almacenar resultado de cada linea.
+	static boolean instanciado = false;
 	
 	//Metodo constructor. Recibe como parametro el nombre del archivo por leer. 
-	public Calculadora(String nombre){
+	private Calculadora(String nombre, String stack){
+		StackFactory<Integer> sFactory = new StackFactory<Integer>();
+		pila = sFactory.getStack(stack);
 		//Valores iniciales para atributos.
 		instruccion = new char[13];
-		//Creacion de pila de enteros utilizando genericos.
-		pila = new StackVector<Integer>();
 		pila.push(resultado);
 		//Creacion del archivo para lectura.
 		try{
@@ -46,6 +47,17 @@ public class Calculadora {
 	    }
 	}
 	
+	//Metodo para implementacion del patron de diseño Singleton.
+	public static Calculadora Instance(String stack){
+		if(!instanciado){
+			instanciado = true;
+			return new Calculadora("postfix.txt", stack);
+		}
+		else
+			return null;
+		
+	}
+	
 	//Metodo para llevar a cabo instrucciones. Utiliza metodos de apoyo.
 	public void operar(){
 		//Evalua la linea obtenida del archivo texto. 
@@ -67,7 +79,8 @@ public class Calculadora {
 					break;
 				//Para cada numero.
 				default:
-					pila.push(Character.getNumericValue(instruccion[i]));
+					int num = Character.getNumericValue(instruccion[i]);
+					pila.push(num);
 					break;
 			}
 		}
@@ -95,7 +108,7 @@ public class Calculadora {
 	}
 	
 	//Metodos set y get para cada atributo.
-	public StackVector<Integer> getPila() {
+	public Stack<Integer> getPila() {
 		return pila;
 	}
 
