@@ -73,7 +73,6 @@ public class StackLinkedList<E> extends AbstractLista<E> {
 
 	@Override
 	public void find() {
-		// TODO Auto-generated method stub
 		
 	}
 
