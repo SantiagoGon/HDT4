@@ -1,7 +1,7 @@
 public class Node<E>{
         // reference to the next node in the chain,
         // or null if there isn't one.
-        Node next;
+        Node<E> next;
         // data carried by this node.
         // could be of any type you need.
         E data;
@@ -14,7 +14,7 @@ public class Node<E>{
  
         // another Node constructor if we want to
         // specify the node to point to.
-        public Node(Object dataValue, Node nextValue) {
+        public Node(Object dataValue, Node<E> nextValue) {
             next = nextValue;
             data = (E) dataValue;
         }
@@ -28,11 +28,11 @@ public class Node<E>{
             data = (E) dataValue;
         }
  
-        public Node getNext() {
+        public Node<E> getNext() {
             return next;
         }
  
-        public void setNext(Node nextValue) {
+        public void setNext(Node<E> nextValue) {
             next = nextValue;
         }
     }
