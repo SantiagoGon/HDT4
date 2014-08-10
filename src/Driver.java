@@ -37,23 +37,21 @@ public class Driver {
 			calc = Calculadora.Instance("LinkedList");
 		else if(num_lista == 2)
 			calc = Calculadora.Instance("DoublyLinkedList");
-		else
+		else if(num_lista == 3)
 			calc = Calculadora.Instance("Circular");
-
+		else{
+			calc = Calculadora.Instance("default");
+		}
 		break;
 		default:
 			calc = Calculadora.Instance("default");
 			break;
 		}
-		//Creacion de calculadora con archivo provisto.
-		//Llevar a cabo lectura y operacion de instrucciones.
 		calc.operar();
-		//Imprimir instrucciones para verificacion de lectura.
 		System.out.println("Instrucciones: ");
 		for(int i = 0; i < calc.getInstruccion().length; i++){
 			System.out.println(calc.getInstruccion()[i]);
 		}
-		//Despligue de resultado final.
 		System.out.println("\n\n -------Resultado: "+ calc.getResultado());
 	}
 
@@ -68,6 +66,9 @@ public class Driver {
 		System.out.println("3. Lista\n");
 		System.out.println("Ingrese el numero de su eleccion:\n");
 	}
+	/**
+	 * @post Prints menu for list choice.
+	 */
 	public static void menuListas(){
 		System.out.println("Escoja un tipo de lista:\n");
 		System.out.println("1. Simplemente encadenada\n");
@@ -75,10 +76,12 @@ public class Driver {
 		System.out.println("3. Circular\n");
 		System.out.println("Ingrese el numero de su eleccion:\n");
 	}
+	
 	public static int userInput(){
 		/**
 		 * Scanner for user input.
 		 */
+		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		/**
 		 * Variable to store user input.

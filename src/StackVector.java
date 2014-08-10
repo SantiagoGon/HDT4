@@ -1,6 +1,13 @@
 import java.util.Vector;
 
-
+/**
+ *  
+ * <p>
+ * Contains all methods required to simulate a stack structure using 
+ * the Vector type for storage.
+ * <p>
+ * @author Santiago Gonzalez/Daniel Lara
+ */
 public class StackVector<E> extends StackBase<E> {
 
 	/**

@@ -6,40 +6,52 @@ import javax.swing.JOptionPane;
 
 
 public class Calculadora {
-	private File txt;					//Archivo con instrucciones aritmeticas.
-	private char[] instruccion;			//Array para almanacenar cada linea como una instruccion.
-	private Stack<Integer> pila;	//Implementacion con funcionalidad de pila.
-	int resultado = 0;					//Utilizado para almacenar resultado de cada linea.
+	/**
+	 * File containing the arithmetical instructions.
+	 */
+	private File txt;					
+	/**
+	 * Array used to store each line as an instruction.
+	 */
+	private char[] instruccion;			
+	/**
+	 * Implementation of stack structure.
+	 */
+	private Stack<Integer> pila;	
+	/**
+	 * Stores the result obtained from each line.
+	 */
+	int resultado = 0;	
+	/**
+	 * Flag variable for Singleton design pattern. 
+	 */
 	static boolean instanciado = false;
 	
-	//Metodo constructor. Recibe como parametro el nombre del archivo por leer. 
+	/**
+	 * Constructor method.
+	 * @param nombre Name of the file to be read.
+	 * @param stack Implementation of stack structure used in the alogrithm.
+	 */
 	private Calculadora(String nombre, String stack){
 		StackFactory<Integer> sFactory = new StackFactory<Integer>();
 		pila = sFactory.getStack(stack);
-		//Valores iniciales para atributos.
 		instruccion = new char[13];
 		pila.push(resultado);
-		//Creacion del archivo para lectura.
 		try{
 			txt = new File(nombre);
 		}
-		//Excepcion que se lanza cuando el archivo no existe.
 		catch(NullPointerException e){
 			JOptionPane.showMessageDialog(null, "No existe el archivo.", "ERROR", 
 					JOptionPane.ERROR_MESSAGE);
 			System.exit(0);
 		}
 	    try{
-	    	//Creacion de scanner especializado para el archivo.
 	    	Scanner s = new Scanner(txt);
-			//Lee todo el archivo; almacena en la matriz. 
 	        while (s.hasNextLine()) {
 	            instruccion = s.nextLine().toCharArray();
 	        }
-	        //Se cierra el Scanner para evitar "leaks".
 	        s.close();
 	    } 
-	    //Excepcion que se lanza cuando hay un error en lectura.
 	    catch (FileNotFoundException e) {
 			JOptionPane.showMessageDialog(null, "Archivo no encontrado.", "ERROR", 
 					JOptionPane.ERROR_MESSAGE);
@@ -47,7 +59,11 @@ public class Calculadora {
 	    }
 	}
 	
-	//Metodo para implementacion del patron de diseño Singleton.
+	/**
+	 * Singleton method. Ensures only one instance can be created.
+	 * @param stack Stack implementation to be used.
+	 * @return Calculadora, null if already instanced. 
+	 */
 	public static Calculadora Instance(String stack){
 		if(!instanciado){
 			instanciado = true;
@@ -58,9 +74,10 @@ public class Calculadora {
 		
 	}
 	
-	//Metodo para llevar a cabo instrucciones. Utiliza metodos de apoyo.
+	/**
+	 * Main algorithm. Contains instruction to simulate a Postfix calculator.
+	 */
 	public void operar(){
-		//Evalua la linea obtenida del archivo texto. 
 		for(int i = 0; i < instruccion.length; i++){
 			switch(instruccion[i]){
 				case('+'):
@@ -77,7 +94,9 @@ public class Calculadora {
 					break;
 				case(' '):
 					break;
-				//Para cada numero.
+				/**
+				 * Done for every digit found.
+				 */
 				default:
 					int num = Character.getNumericValue(instruccion[i]);
 					pila.push(num);
@@ -86,7 +105,6 @@ public class Calculadora {
 		}
 	}
 	
-	//Metodos de apoyo para operaciones.
 	public void suma(){
 		resultado = pila.pop() + pila.pop();
 		pila.push(resultado);
@@ -107,7 +125,6 @@ public class Calculadora {
 		pila.push(resultado);
 	}
 	
-	//Metodos set y get para cada atributo.
 	public Stack<Integer> getPila() {
 		return pila;
 	}

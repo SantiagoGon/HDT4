@@ -19,13 +19,13 @@ class StackFactory<E> {
 			return new StackVector<E>();
 		case("LinkedList"):
 			return new StackLinkedList<E>();
-	/*
 		case("DoublyLinkedList"):
 			return new StackDoublyLinkedList<E>();
 		case("Circular"):
 			return new StackCircularlyLinkedList<E>();
-*/
 		default:
+			System.out.println("Ingreso invalido. Finalizando programa...");
+			System.exit(0);
 			return null;
 		}
 	}

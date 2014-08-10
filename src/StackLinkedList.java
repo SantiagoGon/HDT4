@@ -1,7 +1,16 @@
-
-
-
+/**
+ *  Singly Linked List 
+ * <p>
+ * Contains all methods required to simulate a stack structure using 
+ * a Singly Linked List. Based on example found on:
+ * http://crunchify.com/how-to-implement-a-linkedlist-class-from-scratch-in-java/
+ * <p>
+ * @author Santiago Gonzalez/Daniel Lara
+ */
 public class StackLinkedList<E> extends AbstractLista<E> {
+	/**
+	 * Reference to head node.
+	 */
 	private Node<E> lead;
 	
 	public StackLinkedList(){
@@ -36,17 +45,14 @@ public class StackLinkedList<E> extends AbstractLista<E> {
 	public void add(E e) {
         Node<E> temp = new Node<E>(e);
         Node<E> actual = lead;
-        // starting at the head node, crawl to the end of the list
         while (actual.getNext() != null) {
             actual = actual.getNext();
         }
-        // the last node's "next" reference set to our new node
         actual.setNext(temp);
-		AbstractLista.contador ++;// increment the number of elements variable		
+		AbstractLista.contador ++;	
 	}
 	
     public E get()
-    // returns the element at the specified position in this list.
     {
     	int index = (this.size());
         Node<E> actual = lead.getNext();
@@ -68,12 +74,7 @@ public class StackLinkedList<E> extends AbstractLista<E> {
             actual = actual.getNext();
         }
         actual.setNext(actual.getNext().getNext());
-        AbstractLista.contador--; // decrement the number of elements variable		
-	}
-
-	@Override
-	public void find() {
-		
+        AbstractLista.contador--; 	
 	}
 
 	public Node<E> getLead() {
